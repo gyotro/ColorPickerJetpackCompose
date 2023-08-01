@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -61,14 +62,15 @@ fun ColorPicker() {
                     .padding(10.dp),
                 controller = colorController,
                 onColorChanged = { colorEnvelope: ColorEnvelope ->
-                 //   Log.d("Color", "${colorEnvelope.hexCode}")
+                    //   Log.d("Color", "${colorEnvelope.hexCode}")
                     hexColor = colorEnvelope.hexCode
                 })
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
+            horizontalArrangement = Arrangement.Center
+        ) {
             AlphaSlider(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -78,8 +80,10 @@ fun ColorPicker() {
             )
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
             BrightnessSlider(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,14 +97,24 @@ fun ColorPicker() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "#$hexColor", color = Color.White)
+            Text(
+                text = "#$hexColor", color =
+                if (isSystemInDarkTheme())
+                    Color.White
+                else
+                    Color.Black
+            )
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
-            Box(modifier = Modifier
-                .size(60.dp)
-                .background(colorController.selectedColor.value)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .background(colorController.selectedColor.value)
+            ) {
             }
         }
     }
