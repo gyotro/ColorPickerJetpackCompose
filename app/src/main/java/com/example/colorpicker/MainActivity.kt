@@ -14,7 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.colorpicker.ui.theme.ColorPickerTheme
@@ -41,8 +41,6 @@ fun ColorPicker() {
         setWheelColor(Color.Black)
         setWheelAlpha(0.5f)
     }
-    colorController
-
 
     var hexColor by remember { mutableStateOf("") }
 
@@ -66,7 +64,12 @@ fun ColorPicker() {
                     hexColor = colorEnvelope.hexCode
                 })
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
+        Text(text = stringResource(R.string.transparency), color = if (isSystemInDarkTheme())
+            Color.White
+        else
+            Color.Black)
+        Spacer(modifier = Modifier.padding(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
@@ -79,7 +82,12 @@ fun ColorPicker() {
                 controller = colorController,
             )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
+        Text(text = stringResource(R.string.brightness), color = if (isSystemInDarkTheme())
+            Color.White
+        else
+            Color.Black)
+        Spacer(modifier = Modifier.padding(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
@@ -92,7 +100,7 @@ fun ColorPicker() {
                 controller = colorController,
             )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
@@ -105,7 +113,7 @@ fun ColorPicker() {
                     Color.Black
             )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
